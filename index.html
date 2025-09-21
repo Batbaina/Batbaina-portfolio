@@ -22,8 +22,10 @@
                     <li><a href="#contact" data-en="Contact" data-fr="Contact">Contact</a></li>
                 </ul>
                 <div class="language-switcher">
-                    <button class="lang-btn active" onclick="switchLanguage('en')" id="en-btn">EN</button>
-                    <button class="lang-btn" onclick="switchLanguage('fr')" id="fr-btn">FR</button>
+                    <select class="lang-select" onchange="switchLanguage(this.value)">
+                        <option value="en" selected>EN</option>
+                        <option value="fr">FR</option>
+                    </select>
                 </div>
                 <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
                     <span></span>

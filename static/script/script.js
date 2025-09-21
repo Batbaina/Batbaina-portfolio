@@ -4,63 +4,57 @@
         
         // Define switchLanguage function globally
         window.switchLanguage = function(lang) {
-            currentLanguage = lang;
-            
-            // Update button states
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            document.getElementById(lang + '-btn').classList.add('active');
-            
-            // Update all elements with data attributes
-            document.querySelectorAll('[data-en]').forEach(element => {
-                const key = lang === 'en' ? 'data-en' : 'data-fr';
-                const text = element.getAttribute(key);
-                if (text) {
-                    // Handle both text content and inner HTML
-                    if (element.children.length > 0) {
-                        // If element has children, update only text nodes
-                        const textNodes = Array.from(element.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
-                        if (textNodes.length > 0) {
-                            textNodes[0].textContent = text;
-                        }
-                    } else {
-                        element.textContent = text;
-                    }
+    currentLanguage = lang;
+    
+    // Update select value
+    const langSelect = document.querySelector('.lang-select');
+    if (langSelect) {
+        langSelect.value = lang;
+    }
+    
+    // Update all elements with data attributes
+    document.querySelectorAll('[data-en]').forEach(element => {
+        const key = lang === 'en' ? 'data-en' : 'data-fr';
+        const text = element.getAttribute(key);
+        if (text) {
+            if (element.children.length > 0) {
+                const textNodes = Array.from(element.childNodes).filter(node => node.nodeType === Node.TEXT_NODE);
+                if (textNodes.length > 0) {
+                    textNodes[0].textContent = text;
                 }
-            });
-            
-            // Update navigation links
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                const enText = link.getAttribute('data-en');
-                const frText = link.getAttribute('data-fr');
-                if (enText && frText) {
-                    link.textContent = lang === 'en' ? enText : frText;
-                }
-            });
-            
-            // Update button spans specifically
-            document.querySelectorAll('.btn span[data-en]').forEach(span => {
-                const enText = span.getAttribute('data-en');
-                const frText = span.getAttribute('data-fr');
-                if (enText && frText) {
-                    span.textContent = lang === 'en' ? enText : frText;
-                }
-            });
-            
-            // Update skill category titles
-            document.querySelectorAll('.skill-category h3 span[data-en]').forEach(span => {
-                const enText = span.getAttribute('data-en');
-                const frText = span.getAttribute('data-fr');
-                if (enText && frText) {
-                    span.textContent = lang === 'en' ? enText : frText;
-                }
-            });
-            
-            // Store language preference (but don't use localStorage in artifacts)
-            // localStorage.setItem('preferredLanguage', lang);
-        };
-
+            } else {
+                element.textContent = text;
+            }
+        }
+    });
+    
+    // Update navigation links
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        const enText = link.getAttribute('data-en');
+        const frText = link.getAttribute('data-fr');
+        if (enText && frText) {
+            link.textContent = lang === 'en' ? enText : frText;
+        }
+    });
+    
+    // Update button spans specifically
+    document.querySelectorAll('.btn span[data-en]').forEach(span => {
+        const enText = span.getAttribute('data-en');
+        const frText = span.getAttribute('data-fr');
+        if (enText && frText) {
+            span.textContent = lang === 'en' ? enText : frText;
+        }
+    });
+    
+    // Update skill category titles
+    document.querySelectorAll('.skill-category h3 span[data-en]').forEach(span => {
+        const enText = span.getAttribute('data-en');
+        const frText = span.getAttribute('data-fr');
+        if (enText && frText) {
+            span.textContent = lang === 'en' ? enText : frText;
+        }
+    });
+};
         // Initialize when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
             // Load saved language preference (disabled for artifact)
